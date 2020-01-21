@@ -21,33 +21,46 @@
 //     return result;
 // }
 
+function get(url) {
+  return {
+    then: function(resolve){ var req = new XMLHttpRequest();
+      var result = [];
+      req.open("get", url, true);
+      req.send(null);
+  
+      req.onload = function() {
+        //   this.convertCSVtoArray(req.responseText);
+        var tmp = req.responseText.split("\n");
+  
+        for (var i = 0; i < tmp.length; ++i) {
+          result[i] = tmp[i].split(",");
+        }
+        resolve(result);}
+    }
+  };
+}
+
+var testarray = [];
+
 window.onload = () => {
   new Vue({
     el: "#tableApp",
     data: {
-      tableData: []
+      tableData: undefined
     },
     methods: {
       getCSV: function() {
-        var req = new XMLHttpRequest();
-        req.open(
-          "get",
-          "http://www.mn.cis.iwate-u.ac.jp/~nakaya/report/Data.csv",
-          true
+        get("http://www.mn.cis.iwate-u.ac.jp/~nakaya/report/Data.csv").then(
+          function(res) {
+            this.tableData = _.cloneDeep(res);
+            console.log(this.tableData);
+          }
         );
-        req.send(null);
-
-        req.onload = function() {
-        //   this.convertCSVtoArray(req.responseText);
-        var tmp = req.responseText.split("\n");
-        console.log(tmp);
-        this.tableData = tmp;
-        console.log(this.tableData[2]);
-        
-        // for (var i = 0; i<tmp.length; i++)
-        //     tmpArray.push(tmp[i].split(","));
-        };
+        // this.tableData = [1,2,3,4];
       },
+      showData: function() {
+        console.log(this.tableData);
+      }
     },
     created: function() {
       this.getCSV();
