@@ -1,0 +1,14 @@
+table{
+    width: 100%;
+    text-align: left;
+}
+table th{
+    padding: 12px;
+    border-bottom: 2px solid darkgray;
+}
+table td{
+    padding: 12px;
+}
+table tr:nth-of-type(even){
+    background-color: rgba(0, 0,255, 0.1);
+}

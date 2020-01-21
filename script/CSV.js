@@ -1,27 +1,3 @@
-// function getCSV() {
-//     var dataArray;
-//     var req = new XMLHttpRequest();
-//     req.open("get", "http://www.mn.cis.iwate-u.ac.jp/~nakaya/report/Data.csv", true);
-//     req.send(null);
-
-//     req.onload = function() {
-//         dataArray = convertCSVtoArray(req.responseText);
-//     }
-//     console.log(dataArray);
-//     return dataArray;
-// }
-
-// function convertCSVtoArray(str) {
-//     var result = [];
-//     var tmp = str.split("\n");
-
-//     for (var i = 0; i < tmp.length; ++i) {
-//         result[i] = tmp[i].split(',');
-//     }
-//     return result;
-// }
-
-
 function get(url) {
   return {
     then: function (resolve) {
@@ -55,11 +31,34 @@ window.onload = () => {
   const vm = new Vue({
     el: "#tableApp",
     data: {
-      tableData: []
+      header: [],
+      rank: [],
+      chartData: orgdata
+    },
+    methods: {
+      clickfunc: function (line) {
+        // console.log("selected", line[3]);
+        this.chartData = [
+          [this.header[3], line[3]],
+          [this.header[4], line[4]],
+          [this.header[5], line[5]],
+          [this.header[6], line[6]],
+          [this.header[7], line[7]]
+        ];
+        console.log(this.chartData)
+        drawCharts();
+      }
     },
     mounted: function () {
+      var tmpArray = [];
       axios.get("http://www.mn.cis.iwate-u.ac.jp/~nakaya/report/Data.csv")
-        .then(response => this.tableData = CSVtoArray(response.data));
+        .then(response => tmpArray = CSVtoArray(response.data))
+        .then(() => {
+          this.header = tmpArray[0];
+          for (var i = 1; i < tmpArray.length; i++)
+            this.rank.push(tmpArray[i]);
+        })
+
     }
   })
 }
