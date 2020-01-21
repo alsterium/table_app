@@ -38,15 +38,16 @@ window.onload = () => {
         req.send(null);
 
         req.onload = function() {
-          this.convertCSVtoArray(req.responseText);
+        //   this.convertCSVtoArray(req.responseText);
+        var tmp = req.responseText.split("\n");
+        console.log(tmp);
+        this.tableData = tmp;
+        console.log(this.tableData[2]);
+        
+        // for (var i = 0; i<tmp.length; i++)
+        //     tmpArray.push(tmp[i].split(","));
         };
       },
-      convertCSVtoArray: function(str) {
-        var tmp = str.split("\n");
-        for (var i = 0; i < tmp.length; ++i) {
-          tableData[i] = tmp[i].split(",");
-        }
-      }
     },
     created: function() {
       this.getCSV();
