@@ -22,7 +22,7 @@
             </thead>
             <tbody>
                 <!-- 1行のくりかえし -->
-                <tr v-for="line in rank" @click="clickfunc(line)">
+                <tr v-for="line in rank" @click="selectRows(line)" v-bind:class="{active_style : isActive}">
                     <!-- 1データの繰り返し -->
                     <td v-for="item in line">{{item}}</td>
                 </tr>
@@ -31,7 +31,7 @@
         
     </section>
     <section style="float:left; padding:10px">
-        <h1>レーダーチャート</h1>
+        <h1>棒グラフ</h1>
         <div id="chartdiv"></div>
     </section>
 </body>

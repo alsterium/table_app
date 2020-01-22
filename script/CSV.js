@@ -32,11 +32,14 @@ window.onload = () => {
     data: {
       header: [],
       rank: [],
-      chartData: orgdata
+      chartData: orgdata,
+      isActive : false
     },
     methods: {
-      clickfunc: function(line) {
+      selectRows: function(line) {
         // console.log("selected", line[3]);
+        this.isActive = true;
+        console.log(this.isActive);
         this.chartData.splice(0, this.chartData.length);
         for (var i = 3; i < 8; i++)
           this.chartData.push([this.header[i], parseInt(line[i],10)]);
