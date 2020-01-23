@@ -1,18 +1,18 @@
-function get(url) {
-  return {
-    then: function(resolve) {
-      var req = new XMLHttpRequest();
-      var result = [];
-      req.open("get", url, true);
-      req.send(null);
+// function get(url) {
+//   return {
+//     then: function(resolve) {
+//       var req = new XMLHttpRequest();
+//       var result = [];
+//       req.open("get", url, true);
+//       req.send(null);
 
-      req.onload = function() {
-        result = CSVtoArray(req.responseText);
-      };
-      resolve(result);
-    }
-  };
-}
+//       req.onload = function() {
+//         result = CSVtoArray(req.responseText);
+//       };
+//       resolve(result);
+//     }
+//   };
+// }
 
 function CSVtoArray(rawCSV) {
   var result = [];
@@ -33,19 +33,56 @@ window.onload = () => {
       header: [],
       rank: [],
       chartData: orgdata,
-      activeItem:"",
-      selectedItem:""
+      activeItem: "",
+      selectedItem: "",
+      sortState: false,
+      average: 0
     },
     methods: {
       selectRows: function(line) {
         this.chartData.splice(0, this.chartData.length);
         for (var i = 3; i < 8; i++)
-          this.chartData.push([this.header[i], parseInt(line[i],10)]);
+          this.chartData.push([this.header[i], parseInt(line[i], 10)]);
         drawCharts();
         this.selectedItem = line;
-        console.log(this.selectedItem);
+      },
+      selectSortOption: function(item) {
+        this.selectedItem = item;
+      },
+      toggleSort: function() {
+        this.sortState = !this.sortState;
+      },
+      sortTable: function(option) {
+        var handler = option;
+        // console.log("handler is ", handler);
+        // console.log("sortState", this.sortState);
+        if (this.sortState === false)
+          if (handler) {
+            if (handler !== 1)
+              this.rank.sort(function(a, b) {
+                return b[handler] - a[handler];
+              });
+            else
+              this.rank.sort(function(a, b) {
+                if (a > b) return -1;
+                if (a > b) return 1;
+                return 0;
+              });
+          }
+        if (this.sortState === true)
+          if (handler !== 1)
+            this.rank.sort(function(a, b) {
+              return a[handler] - b[handler];
+            });
+          else
+            this.rank.sort(function(a, b) {
+              if (a < b) return -1;
+              if (a < b) return 1;
+              return 0;
+            });
       }
     },
+
     mounted: function() {
       var tmpArray = [];
       axios
@@ -53,7 +90,8 @@ window.onload = () => {
         .then(response => (tmpArray = CSVtoArray(response.data)))
         .then(() => {
           this.header = tmpArray[0];
-          for (var i = 1; i < tmpArray.length; i++) this.rank.push(tmpArray[i]);
+          for (var i = 1; i < tmpArray.length - 1; i++)
+            this.rank.push(tmpArray[i]);
         });
     }
   });

@@ -21,3 +21,6 @@ table tr:nth-of-type(even){
     font-weight: bold;
     background-color: rgba(76, 135, 243, 0.548) !important;
 }
+.v-move{
+    transition:1.0s;
+}
