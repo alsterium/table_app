@@ -24,6 +24,5 @@ function drawCharts() {
   var chart = new google.visualization.BarChart(
     document.getElementById("chartdiv")
   );
-  console.log(orgdata);
   chart.draw(data, options);
 }

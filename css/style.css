@@ -17,3 +17,7 @@ table tr:nth-of-type(even){
 .active_style{
     background-color: rgba(241, 169, 76, 0.322) !important;
 }
+.selected_style{
+    font-weight: bold;
+    background-color: rgba(76, 135, 243, 0.548) !important;
+}

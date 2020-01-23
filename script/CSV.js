@@ -33,7 +33,8 @@ window.onload = () => {
       header: [],
       rank: [],
       chartData: orgdata,
-      activeItem:""
+      activeItem:"",
+      selectedItem:""
     },
     methods: {
       selectRows: function(line) {
@@ -41,6 +42,8 @@ window.onload = () => {
         for (var i = 3; i < 8; i++)
           this.chartData.push([this.header[i], parseInt(line[i],10)]);
         drawCharts();
+        this.selectedItem = line;
+        console.log(this.selectedItem);
       }
     },
     mounted: function() {

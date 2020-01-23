@@ -19,6 +19,7 @@
         <thead>
           <th v-for="item in header">{{item}}</th>
         </thead>
+
         <tbody>
           <!-- 1行のくりかえし -->
           <tr
@@ -26,7 +27,7 @@
             @click="selectRows(line)"
             @mouseover="activeItem=line"
             @mouseout="activeItem=''"
-            v-bind:class="{active_style : activeItem===line}"
+            v-bind:class="{active_style : activeItem === line ,selected_style : selectedItem === line}"
           >
             <!-- 1データの繰り返し -->
             <td v-for="item in line">{{item}}</td>
