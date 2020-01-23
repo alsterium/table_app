@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="ja">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>課題サンプル</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="./script/chart.js"></script>
     <script src="./script/CSV.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <section id="tableApp" style="float:left; padding:10px">
-        <h1>データ</h1>
-        <table>
-            <thead>
-                <th v-for="item in header">{{item}}</th>
-            </thead>
-            <tbody>
-                <!-- 1行のくりかえし -->
-                <tr v-for="line in rank" @click="selectRows(line)" v-bind:class="{active_style : isActive}">
-                    <!-- 1データの繰り返し -->
-                    <td v-for="item in line">{{item}}</td>
-                </tr>
-            </tbody>
-        </table>
-        
+      <h1>データ</h1>
+      <table>
+        <thead>
+          <th v-for="item in header">{{item}}</th>
+        </thead>
+        <tbody>
+          <!-- 1行のくりかえし -->
+          <tr
+            v-for="line in rank"
+            @click="selectRows(line)"
+            @mouseover="activeItem=line"
+            @mouseout="activeItem=''"
+            v-bind:class="{active_style : activeItem===line}"
+          >
+            <!-- 1データの繰り返し -->
+            <td v-for="item in line">{{item}}</td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <section style="float:left; padding:10px">
-        <h1>棒グラフ</h1>
-        <div id="chartdiv"></div>
+      <h1>棒グラフ</h1>
+      <div id="chartdiv"></div>
     </section>
-</body>
-
+  </body>
 </html>

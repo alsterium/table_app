@@ -9,10 +9,11 @@ table th{
 table td{
     padding: 12px;
 }
+
 table tr:nth-of-type(even){
     background-color: rgba(0, 0,255, 0.1);
 }
 
 .active_style{
-    background-color: rgba(255,0,0,0.1);
+    background-color: rgba(241, 169, 76, 0.322) !important;
 }
