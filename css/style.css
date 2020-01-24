@@ -3,15 +3,18 @@ table{
     text-align: left;
 }
 table th{
-    padding: 12px;
-    border-bottom: 2px solid darkgray;
+    padding: 8px;
+    border-bottom: 6px solid darkgray;
 }
 table td{
-    padding: 12px;
+    padding:9px;
 }
 
 table tr:nth-of-type(even){
     background-color: rgba(0, 0,255, 0.1);
+}
+table tr:nth-of-type(odd){
+    background-color: rgba(117, 126, 134, 0.096);
 }
 
 .active_style{
@@ -20,7 +23,4 @@ table tr:nth-of-type(even){
 .selected_style{
     font-weight: bold;
     background-color: rgba(76, 135, 243, 0.548) !important;
-}
-.v-move{
-    transition:1.0s;
 }

@@ -26,6 +26,20 @@ function CSVtoArray(rawCSV) {
   return result;
 }
 
+function computeScore(array) {
+  var sumScore = 0.0;
+  for (let i = 3; i < 8; i++) sumScore += parseFloat(array[i]);
+  return [sumScore / 5.0, sumScore];
+}
+
+function generateLine(array) {
+  var outArray = array;
+  var [avg, sum] = computeScore(array);
+  outArray.push(avg);
+  outArray.push(sum);
+  return outArray;
+}
+
 window.onload = () => {
   const vm = new Vue({
     el: "#tableApp",
@@ -36,7 +50,6 @@ window.onload = () => {
       activeItem: "",
       selectedItem: "",
       sortState: false,
-      average: 0
     },
     methods: {
       selectRows: function(line) {
@@ -82,7 +95,7 @@ window.onload = () => {
             });
       }
     },
-
+    computed: {},
     mounted: function() {
       var tmpArray = [];
       axios
@@ -90,8 +103,9 @@ window.onload = () => {
         .then(response => (tmpArray = CSVtoArray(response.data)))
         .then(() => {
           this.header = tmpArray[0];
+          this.header.push("平均点", "合計点");
           for (var i = 1; i < tmpArray.length - 1; i++)
-            this.rank.push(tmpArray[i]);
+            this.rank.push(generateLine(tmpArray[i]));
         });
     }
   });
