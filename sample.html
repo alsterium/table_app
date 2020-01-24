@@ -32,17 +32,20 @@
             </th>
           </thead>
           <tbody>
-              <!-- 1行のくりかえし -->
-              <tr
-                v-for="line in rank"
-                @click="selectRows(line)"
-                @mouseover="activeItem=line"
-                @mouseout="activeItem=''"
-                v-bind:class="{active_style : activeItem === line ,selected_style : selectedItem === line}"
-              >
-                <!-- 1データの繰り返し -->
-                <td v-for="item in line">{{item}}</td>
-              </tr>
+            <!-- 1行のくりかえし -->
+            <tr
+              v-for="line in rank"
+              @click="selectRows(line)"
+              @mouseover="activeItem=line"
+              @mouseout="activeItem=''"
+              v-bind:class="{active_style : activeItem === line ,selected_style : selectedItem === line}"
+            >
+              <!-- 1データの繰り返し -->
+              <td v-for="item in line">{{item}}</td>
+            </tr>
+            <tr v-for="line in findMiniMax">
+              <td v-for="item in line">{{item}}</td>
+            </tr>
           </tbody>
         </table>
       </section>

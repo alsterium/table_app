@@ -40,6 +40,22 @@ function generateLine(array) {
   return outArray;
 }
 
+// function findMiniMax(array) {
+//   let min = 100;
+//   let max = 0;
+//   let minArray = [];
+//   let maxArray = [];
+//   for (let i = 3; i < 8; i++) {
+//     for (let j = 1; j < this.rank.length; i++) {
+//       if (max < this.rank[j][i]) max = this.rank[j][i];
+//       if (min > this.rank[j][i]) min = this.rank[j][i];
+//     }
+//     minArray.push(min);
+//     maxArray.push(max);
+//   }
+//   console.log([max, min]);
+// }
+
 window.onload = () => {
   const vm = new Vue({
     el: "#tableApp",
@@ -50,6 +66,7 @@ window.onload = () => {
       activeItem: "",
       selectedItem: "",
       sortState: false,
+      MiniMax: []
     },
     methods: {
       selectRows: function(line) {
@@ -93,9 +110,25 @@ window.onload = () => {
               if (a < b) return 1;
               return 0;
             });
+      },
+    },
+    computed: {
+      findMiniMax: function() {
+        let minArray = ['最小値','',''];
+        let maxArray = ['最大値','',''];
+        for (let i = 3; i < 8; i++) {
+          let min = 100;
+          let max = 0;
+          for (let j = 0; j < this.rank.length; j++) {
+            if (max < this.rank[j][i]) max = this.rank[j][i];
+            if (min > this.rank[j][i]) min = this.rank[j][i];
+          }
+          minArray.push(min);
+          maxArray.push(max);
+        }
+        return([maxArray, minArray]);
       }
     },
-    computed: {},
     mounted: function() {
       var tmpArray = [];
       axios
