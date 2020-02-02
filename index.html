@@ -16,16 +16,19 @@
       <section>
         <div class="colmun_style">
           <h1>データ</h1>
-          <button @click="toggleSort">
+          <button @click="toggleSort" class="btn-square-pop">
             ソート順：<span v-if="!sortState">降順▼</span
             ><span v-if="sortState">昇順▲</span>
           </button>
-          <button @click="toggleClass">
+          <button @click="toggleClass" class="btn-square-pop">
             学年: <span v-if="grade != ''">{{grade}}年</span>
             <span v-else> 全学年</span>
           </button>
-          <span>テキストフィルタ</span>
-          <input type="text" v-model="textFilter" />
+          <span class="cp_iptxt">
+            <label class="ef"></label>
+            <input placeholder="テキストフィルタ" type="text" v-model="textFilter" />
+          </span>
+          
           <table>
             <thead>
               <th
