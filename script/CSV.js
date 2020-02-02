@@ -114,8 +114,9 @@ window.onload = () => {
             });
       },
       toggleClass: function() {
-        // this.grade = (this.grade + 1) % 4;
-        // this.textFilter = this.grade.toString();
+        this.grade = (this.grade + 1) % 4;
+        if(this.grade === 0) this.grade = "";
+        this.textFilter = this.grade.toString();
       }
     },
     computed: {
@@ -128,7 +129,7 @@ window.onload = () => {
         } else {
           array = this.rank;
         }
-
+        console.log(array);
         let minArray = ["最小値", "", ""];
         let maxArray = ["最大値", "", ""];
         for (let i = 3; i < 8; i++) {

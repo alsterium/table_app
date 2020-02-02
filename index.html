@@ -21,7 +21,7 @@
             ><span v-if="sortState">昇順▲</span>
           </button>
           <button @click="toggleClass">
-            学年: <span v-if="grade != '0'">{{grade}}年</span>
+            学年: <span v-if="grade != ''">{{grade}}年</span>
             <span v-else> 全学年</span>
           </button>
           <span>テキストフィルタ</span>
