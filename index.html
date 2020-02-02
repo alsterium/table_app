@@ -13,45 +13,49 @@
 
   <body>
     <div id="tableApp">
-      <section style="float:left; padding:10px">
-        <h1>データ</h1>
-        <button @click="toggleSort">
-          ソート順：<span v-if="!sortState">降順▼</span
-          ><span v-if="sortState">昇順▲</span>
-        </button>
-        <table>
-          <thead>
-            <th
-              v-for="(item,index) in header"
-              @click="selectSortOption(item), sortTable(index)"
-              @mouseover="activeItem=item"
-              @mouseout="activeItem=''"
-              v-bind:class="{active_style : activeItem === item ,selected_style : selectedItem === item}"
-            >
-              {{item}}
-            </th>
-          </thead>
-          <tbody>
-            <!-- 1行のくりかえし -->
-            <tr
-              v-for="line in rank"
-              @click="selectRows(line)"
-              @mouseover="activeItem=line"
-              @mouseout="activeItem=''"
-              v-bind:class="{active_style : activeItem === line ,selected_style : selectedItem === line}"
-            >
-              <!-- 1データの繰り返し -->
-              <td v-for="item in line">{{item}}</td>
-            </tr>
-            <tr v-for="line in findMiniMax">
-              <td v-for="item in line">{{item}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <section style="float:left; padding:10px">
-        <h1>棒グラフ</h1>
-        <div id="chartdiv"></div>
+      <section>
+        <div class="colmun_style">
+          <h1>データ</h1>
+          <button @click="toggleSort">
+            ソート順：<span v-if="!sortState">降順▼</span
+            ><span v-if="sortState">昇順▲</span>
+          </button>
+          <table>
+            <thead>
+              <th
+                v-for="(item,index) in header"
+                @click="selectSortOption(item), sortTable(index)"
+                @mouseover="activeItem=item"
+                @mouseout="activeItem=''"
+                v-bind:class="{active_style : activeItem === item ,selected_style : selectedItem === item}"
+              >
+                {{item}}
+              </th>
+            </thead>
+            <tbody>
+              <!-- 1行のくりかえし -->
+              <tr
+                v-for="line in rank"
+                @click="selectRows(line)"
+                @mouseover="activeItem=line"
+                @mouseout="activeItem=''"
+                v-bind:class="{active_style : activeItem === line ,selected_style : selectedItem === line}"
+              >
+                <!-- 1データの繰り返し -->
+                <td v-for="item in line">{{item}}</td>
+              </tr>
+              <tr v-for="line in findMiniMax">
+                <td v-for="item in line">{{item}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="colmun_style">
+          <div class="sticky">
+            <h1>棒グラフ</h1>
+            <div id="chartdiv"></div>
+          </div>
+        </div>
       </section>
     </div>
   </body>
