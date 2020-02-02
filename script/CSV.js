@@ -66,7 +66,9 @@ window.onload = () => {
       activeItem: "",
       selectedItem: "",
       sortState: false,
-      MiniMax: []
+      MiniMax: [],
+      grade: 0,
+      textFilter: ""
     },
     methods: {
       selectRows: function(line) {
@@ -111,22 +113,44 @@ window.onload = () => {
               return 0;
             });
       },
+      toggleClass: function() {
+        // this.grade = (this.grade + 1) % 4;
+        // this.textFilter = this.grade.toString();
+      }
     },
     computed: {
       findMiniMax: function() {
-        let minArray = ['最小値','',''];
-        let maxArray = ['最大値','',''];
+        let array;
+        if (this.textFilter) {
+          array = this.rank.filter(value => {
+            return value.indexOf(this.textFilter) > -1;
+          }, this);
+        } else {
+          array = this.rank;
+        }
+
+        let minArray = ["最小値", "", ""];
+        let maxArray = ["最大値", "", ""];
         for (let i = 3; i < 8; i++) {
           let min = 100;
           let max = 0;
-          for (let j = 0; j < this.rank.length; j++) {
-            if (max < this.rank[j][i]) max = this.rank[j][i];
-            if (min > this.rank[j][i]) min = this.rank[j][i];
+          for (let j = 0; j < array.length; j++) {
+            if (max < array[j][i]) max = array[j][i];
+            if (min > array[j][i]) min = array[j][i];
           }
           minArray.push(min);
           maxArray.push(max);
         }
-        return([maxArray, minArray]);
+        return [maxArray, minArray];
+      },
+      findFilter: function() {
+        if (this.textFilter) {
+          return this.rank.filter(value => {
+            return value.indexOf(this.textFilter) > -1;
+          }, this);
+        } else {
+          return this.rank;
+        }
       }
     },
     mounted: function() {

@@ -20,6 +20,12 @@
             ソート順：<span v-if="!sortState">降順▼</span
             ><span v-if="sortState">昇順▲</span>
           </button>
+          <button @click="toggleClass">
+            学年: <span v-if="grade != '0'">{{grade}}年</span>
+            <span v-else> 全学年</span>
+          </button>
+          <span>テキストフィルタ</span>
+          <input type="text" v-model="textFilter" />
           <table>
             <thead>
               <th
@@ -35,7 +41,7 @@
             <tbody>
               <!-- 1行のくりかえし -->
               <tr
-                v-for="line in rank"
+                v-for="line in findFilter"
                 @click="selectRows(line)"
                 @mouseover="activeItem=line"
                 @mouseout="activeItem=''"

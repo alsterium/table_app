@@ -36,6 +36,6 @@ table tr:nth-of-type(odd) {
   padding: 10px;
 }
 
-section{
-    display: flex;
+section {
+  display: flex;
 }
