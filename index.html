@@ -26,9 +26,87 @@
           </button>
           <span class="cp_iptxt">
             <label class="ef"></label>
-            <input placeholder="テキストフィルタ" type="text" v-model="textFilter" />
-          </span>
-          
+            <input
+              placeholder="テキストフィルタ"
+              type="text"
+              v-model="textFilter"
+            /> </span
+          ><br />
+          <!-- <details open>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+                <input placeholder="番号" type="text" />
+              </span>
+            </li>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+                <input placeholder="氏名" type="text" />
+              </span>
+            </li>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+                <input placeholder="学年" type="text" />
+              </span>
+            </li>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+                <input placeholder="国語" type="text" />
+              </span>
+            </li>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+                <input placeholder="数学" type="text" />
+              </span>
+            </li>
+            <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+               <input placeholder="英語" type="text">
+              </span>
+             </li>           <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+               <input placeholder="理科" type="text">
+              </span>
+             </li>           <li>
+              <span class="cp_iptxt">
+                <label class="ef"></label>
+               <input placeholder="社会" type="text">
+               <button　class="btn-square-pop">行を追加</button　class="btn-square-pop">
+              </span>
+             </li>
+          </details> -->
+
+          <details>
+            <summary>行追加</summary>
+            <li
+              v-for="(item ,index) in header"
+              v-if="item != '合計点' && item != '平均点'"
+            >
+              <span v-if="item === '氏名'" class="cp_iptxt">
+                <label class="ef"></label>
+                <input
+                  :placeholder="item"
+                  type="text"
+                  v-model="addLineData[index]"
+                />
+              </span>
+              <span v-else class="cp_iptxt">
+                <label class="ef"></label>
+                <input
+                  :placeholder="item"
+                  type="number"
+                  v-model="addLineData[index]"
+                />
+              </span>
+            </li>
+            <button class="btn-square-pop" @click="addLine">行追加</button>
+          </details>
           <table>
             <thead>
               <th

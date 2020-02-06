@@ -63,7 +63,7 @@ section {
 	width: 80%;
 	margin: 40px 3%;
 }
-.cp_iptxt input[type='text'] {
+.cp_iptxt input {
 	font: 15px/24px sans-serif;
 	box-sizing: border-box;
 	/* width: 100%; */
@@ -74,7 +74,7 @@ section {
 	border: 1px solid #1b2538;
 	border-radius: 4px;
 }
-.ef input[type='text']:focus {
+.ef input:focus {
 	border: 1px solid #da3c41;
 	outline: none;
 	box-shadow: 0 0 5px 1px rgba(218,60,65, .5);

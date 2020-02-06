@@ -1,19 +1,3 @@
-// function get(url) {
-//   return {
-//     then: function(resolve) {
-//       var req = new XMLHttpRequest();
-//       var result = [];
-//       req.open("get", url, true);
-//       req.send(null);
-
-//       req.onload = function() {
-//         result = CSVtoArray(req.responseText);
-//       };
-//       resolve(result);
-//     }
-//   };
-// }
-
 function CSVtoArray(rawCSV) {
   var result = [];
 
@@ -39,23 +23,6 @@ function generateLine(array) {
   outArray.push(sum);
   return outArray;
 }
-
-// function findMiniMax(array) {
-//   let min = 100;
-//   let max = 0;
-//   let minArray = [];
-//   let maxArray = [];
-//   for (let i = 3; i < 8; i++) {
-//     for (let j = 1; j < this.rank.length; i++) {
-//       if (max < this.rank[j][i]) max = this.rank[j][i];
-//       if (min > this.rank[j][i]) min = this.rank[j][i];
-//     }
-//     minArray.push(min);
-//     maxArray.push(max);
-//   }
-//   console.log([max, min]);
-// }
-
 window.onload = () => {
   const vm = new Vue({
     el: "#tableApp",
@@ -68,7 +35,8 @@ window.onload = () => {
       sortState: false,
       MiniMax: [],
       grade: 0,
-      textFilter: ""
+      textFilter: "",
+      addLineData: []
     },
     methods: {
       selectRows: function(line) {
@@ -86,8 +54,6 @@ window.onload = () => {
       },
       sortTable: function(option) {
         var handler = option;
-        // console.log("handler is ", handler);
-        // console.log("sortState", this.sortState);
         if (this.sortState === false)
           if (handler) {
             if (handler !== 1)
@@ -115,8 +81,16 @@ window.onload = () => {
       },
       toggleClass: function() {
         this.grade = (this.grade + 1) % 4;
-        if(this.grade === 0) this.grade = "";
+        if (this.grade === 0) this.grade = "";
         this.textFilter = this.grade.toString();
+      },
+      addLine: function() {
+        if (this.addLineData.some(el=>!!el)){//el=>!!elで配列中にnullがあるかチェック
+          this.rank.push(generateLine(this.addLineData));
+          this.addLineData = [];
+        }else{
+          alert('不正な入力：入力していない部分があります。')
+        }
       }
     },
     computed: {
@@ -129,7 +103,6 @@ window.onload = () => {
         } else {
           array = this.rank;
         }
-        console.log(array);
         let minArray = ["最小値", "", ""];
         let maxArray = ["最大値", "", ""];
         for (let i = 3; i < 8; i++) {
