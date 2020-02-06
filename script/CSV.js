@@ -105,17 +105,21 @@ window.onload = () => {
         }
         let minArray = ["最小値", "", ""];
         let maxArray = ["最大値", "", ""];
+        let sumArray = ["平均値", "", ""];
         for (let i = 3; i < 8; i++) {
           let min = 100;
           let max = 0;
+          let sum = 0;
           for (let j = 0; j < array.length; j++) {
             if (max < array[j][i]) max = array[j][i];
             if (min > array[j][i]) min = array[j][i];
+            sum += parseInt(array[j][i],10);
           }
           minArray.push(min);
           maxArray.push(max);
+          sumArray.push(Math.round(sum/array.length));
         }
-        return [maxArray, minArray];
+        return [maxArray, minArray,sumArray];
       },
       findFilter: function() {
         if (this.textFilter) {
