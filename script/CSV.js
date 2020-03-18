@@ -134,7 +134,7 @@ window.onload = () => {
     mounted: function() {
       var tmpArray = [];
       axios
-        .get("http://www.mn.cis.iwate-u.ac.jp/~nakaya/report/Data.csv")
+        .get("https://raw.githubusercontent.com/alsterium/table_app/master/Data.csv")
         .then(response => (tmpArray = CSVtoArray(response.data)))
         .then(() => {
           this.header = tmpArray[0];
